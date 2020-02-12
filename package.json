@@ -1,0 +1,11 @@
+{
+  "name": "lit-regions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:uxland/lit-regions.git",
+  "author": "Alex Vizcaino <avizcaino@uxland.es>",
+  "license": "ISC",
+  "dependencies": {
+    "@uxland/regions": "^1.0.0-alpha.0"
+  }
+}
