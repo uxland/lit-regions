@@ -5,7 +5,37 @@
   "repository": "git@github.com:uxland/lit-regions.git",
   "author": "Alex Vizcaino <avizcaino@uxland.es>",
   "license": "ISC",
+  "scripts": {
+    "build:es": "tsc -p tsconfig.build.json --outDir es",
+    "build:cjs": "tsc -p tsconfig.build.json --outDir lib --module commonjs --declaration",
+    "build": "yarn build:es && yarn build:cjs",
+    "build:test": "echo nok > .buildstatus && yarn type-check && echo ok > .buildstatus",
+    "prebuild": "echo nok > .buildstatus",
+    "postbuild": "echo ok > .buildstatus",
+    "dist": "yarn build",
+    "readme:coverage": "node_modules/.bin/jest-badges-readme",
+    "semantic-release": "semantic-release",
+    "semantic-release:dry-run": "semantic-release --dry-run",
+    "semantic-release:local": "yarn dist && semantic-release --no-ci --debug",
+    "postsemantic-release:local": "git checkout -- package*",
+    "tdd": "jest --watch --collect-coverage",
+    "tdd:benchmark": "jest --watch test/unit/benchmark.spec.ts --collect-coverage=false --testPathIgnorePatterns []",
+    "tdd:sandbox": "jest --watch test/unit/sandbox.spec.ts --testPathIgnorePatterns []",
+    "test:benchmark": "jest test/unit/benchmark.spec.ts --collect-coverage=false --testPathIgnorePatterns []",
+    "test:ui:watch": "nodemon --watch test --watch src -x \"polymer test --config-file wct.config.json\"",
+    "test:ui": "polymer test --config-file wct.config.json",
+    "test:unit": "jest --collect-coverage",
+    "test": "yarn test:unit",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn type-check -- --watch"
+  },
   "dependencies": {
-    "@uxland/regions": "^1.0.0-alpha.0"
+    "@uxland/regions": "^1.0.0-alpha.0",
+    "jest": "^25.1.0",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.0",
+    "typescript": "^3.7.5"
   }
 }
